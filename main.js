@@ -3,8 +3,8 @@
     const depth_input = document.getElementById('depth');
     const canvas = document.getElementById('f');
 
-    canvas.width = 1024;
-    canvas.height = 768;
+    canvas.width = 800;
+    canvas.height = 700;
 
     const ctx = canvas.getContext('2d');
     ctx.strokeStyle = '#fff';
@@ -17,9 +17,9 @@
         dragon: {
             action: ()=>{
                 let x0 = canvas.width / 2,
-                    y0 = 200,
+                    y0 = 165,
                     x1 = canvas.width / 2,
-                    y1 = 650;
+                    y1 = 615;
 
                 ctx.beginPath();
                 ctx.moveTo(x0, y0);
