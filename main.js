@@ -25,7 +25,7 @@
                 ctx.moveTo(x0, y0);
                 Dragon (POINTS, depth_input.value, x0, y0, x1, y1);
             },
-            depth: 11,
+            depth: 9,
             max_depth: 15
         },
         minkovsky: {
@@ -78,7 +78,11 @@
 
         if (CURRENT_MOOD != mood_name)
         {
-            depth_input.value = mood.depth;
+//            if (depth_input.value > mood.max_depth)
+            {
+                depth_input.value = mood.depth;
+            }
+
             if (CURRENT_MOOD) {
                 mood_list[CURRENT_MOOD].button.classList.remove('active');
             }
