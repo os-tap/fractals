@@ -101,7 +101,7 @@
         setTimeout(()=>{
             DrawMood(mood_name);
             canvas.style.opacity = '1';
-        }, 75);
+        }, 100);
 
 
     }
