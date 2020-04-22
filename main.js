@@ -1,4 +1,4 @@
-;(function() {
+//;(function() {
 
     const depth_input = document.getElementById('depth');
     const canvas = document.getElementById('f');
@@ -15,35 +15,41 @@
 
     const mood_list = {
         dragon: {
-            action: ()=>{
+            calc: ()=>{
                 let x0 = canvas.width / 2,
                     y0 = 165,
                     x1 = canvas.width / 2,
                     y1 = 615;
 
-                ctx.beginPath();
-                ctx.moveTo(x0, y0);
+                POINTS.push({
+                    x: x0,
+                    y: y0
+                });
+
                 Dragon (POINTS, depth_input.value, x0, y0, x1, y1);
             },
             depth: 9,
             max_depth: 15
         },
         minkovsky: {
-            action: ()=>{
+            calc: ()=>{
                 let x0 = 0,
                     y0 = canvas.height / 2,
                     x1 = canvas.width,
                     y1 = canvas.height / 2;
-                ctx.beginPath();
-                ctx.moveTo(x0, y0);
+
+                POINTS.push({
+                    x: x0,
+                    y: y0
+                });
+
                 Minkovsky(POINTS, depth_input.value, x0, y0, x1, y1);
             },
             depth: 2,
             max_depth: 5
         },
         hilbert: {
-            action: ()=>{
-                ctx.beginPath();
+            calc: ()=>{
                 Hilbert(POINTS, depth_input.value, canvas.width, canvas.height)
             },
             depth: 5,
@@ -59,14 +65,12 @@
     }
 
 
-
+    let interval_id = 0;
     let CURRENT_MOOD = '';
 
     SetMood('hilbert');
 
-    depth_input.onchange = ()=>{
-        SetMood(CURRENT_MOOD);
-    }
+    depth_input.onchange = ()=>SetMood(CURRENT_MOOD);
 
 
 
@@ -92,19 +96,59 @@
         CURRENT_MOOD = mood_name;
 
 
+        canvas.style.opacity = '0.5';
+        CalcMood(mood_name);
+        setTimeout(()=>{
+            DrawMood(mood_name);
+            canvas.style.opacity = '1';
+        }, 75);
+
+
+    }
+
+    function CalcMood(mood_name) {
         POINTS = [];
+        mood_list[mood_name].calc();
+    }
+    function DrawMood(mood_name) {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-        mood.action();
-
-        POINTS.forEach((point, i) => {
-            ctx.lineTo(point.x, point.y);
-        });
-
+        ctx.beginPath();
+        POINTS.forEach(point => ctx.lineTo(point.x, point.y));
         ctx.stroke();
     }
 
+    function Animate() {
+//        ctx.clearRect(0,0,canvas.width,canvas.height);
+//        let i = 0, j = POINTS.length-1;
+        let i = 0;
+        let j = POINTS.length - 1;
+//        ctx.beginPath();
 
-})()
+
+        clearInterval(interval_id);
+        interval_id = setInterval(()=>{
+
+
+            ctx.beginPath();
+            ctx.moveTo(POINTS[i].x, POINTS[i].y);
+
+
+            ctx.lineTo(POINTS[i+1].x, POINTS[i+1].y);
+
+
+
+//            ctx.moveTo(POINTS[j].x, POINTS[j].y);
+//            ctx.lineTo(POINTS[j-1].x, POINTS[j-1].y);
+
+
+            ctx.stroke();
+
+            if(++i == POINTS.length - 1) {
+                clearInterval(interval_id);
+            };
+
+        },18);
+    }
+
+//})()
 

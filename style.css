@@ -9,6 +9,9 @@ body {
     background: #333;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji
 }
+#f {
+    transition: .075s ease-in;
+}
 
 .text {
     height: 768px;
