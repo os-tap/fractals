@@ -1,2 +1,2 @@
-# fractals
-view: <a href="https://webostap.github.io/fractals/">https://webostap.github.io/fractals/</a>
+/# fractals
+view: <a href="http://fractals.ostap.xyz/">http://fractals.ostap.xyz/</a>
