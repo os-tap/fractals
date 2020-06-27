@@ -1,2 +1,2 @@
 # fractals
-view: <a href="http://fractals.ostap.xyz/">http://fractals.ostap.xyz/</a>
+view: <a href="https://fractals.ostap.xyz/">https://fractals.ostap.xyz/</a>
