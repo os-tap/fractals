@@ -134,7 +134,7 @@
             ctx.lineTo(POINTS[i].x, POINTS[i].y)
             ctx.stroke()
 
-            if(++i == POINTS.length - 1) {
+            if(++i == POINTS.length) {
                 clearInterval(interval_id)
             };
         })
