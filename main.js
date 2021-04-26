@@ -2,6 +2,7 @@
 
     const depth_input = document.getElementById('depth');
     const canvas = document.getElementById('f');
+    const animate_check = document.getElementById('animate');
 
     canvas.width = 800;
     canvas.height = 700;
@@ -68,13 +69,16 @@
     let interval_id = 0;
     let CURRENT_MOOD = '';
 
-    SetMood('hilbert');
-
-    depth_input.onchange = ()=>SetMood(CURRENT_MOOD);
-
+    SetMood('dragon')
+    depth_input.onchange = animate_check.onchange = ()=>{SetMood()}
 
 
-    function SetMood(mood_name) {
+
+    function SetMood(mood_name = null) {
+//        console.log(mood_name)
+        if (!mood_name) mood_name = CURRENT_MOOD
+        
+        clearInterval(interval_id)
 
         const mood = mood_list[mood_name];
 
@@ -99,7 +103,7 @@
         canvas.style.opacity = '0.5';
         CalcMood(mood_name);
         setTimeout(()=>{
-            DrawMood(mood_name);
+            animate_check.checked ? Animate() : DrawMood()
             canvas.style.opacity = '1';
         }, 100);
 
@@ -110,7 +114,7 @@
         POINTS = [];
         mood_list[mood_name].calc();
     }
-    function DrawMood(mood_name) {
+    function DrawMood() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.beginPath();
         POINTS.forEach(point => ctx.lineTo(point.x, point.y));
@@ -118,13 +122,34 @@
     }
 
     function Animate() {
+        clearInterval(interval_id)
+        
+        ctx.beginPath()
+        let i = 0
+        interval_id = setInterval(()=>{
+        
+        requestAnimationFrame(()=>{
+                               
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            ctx.lineTo(POINTS[i].x, POINTS[i].y)
+            ctx.stroke()
+
+            if(++i == POINTS.length - 1) {
+                clearInterval(interval_id)
+            };
+        })
+        
+        },18);
+    }
+    function AnimateOld() {
 //        ctx.clearRect(0,0,canvas.width,canvas.height);
 //        let i = 0, j = POINTS.length-1;
         let i = 0;
         let j = POINTS.length - 1;
 //        ctx.beginPath();
 
-
+        
+        ctx.clearRect(0,0,canvas.width,canvas.height);
         clearInterval(interval_id);
         interval_id = setInterval(()=>{
 
