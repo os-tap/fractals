@@ -129,14 +129,16 @@
         interval_id = setInterval(()=>{
         
         requestAnimationFrame(()=>{
+
+            if(++i >= POINTS.length) {
+                clearInterval(interval_id)
+                return
+            };
                                
             ctx.clearRect(0,0,canvas.width,canvas.height)
             ctx.lineTo(POINTS[i].x, POINTS[i].y)
             ctx.stroke()
 
-            if(++i == POINTS.length) {
-                clearInterval(interval_id)
-            };
         })
         
         },18);
