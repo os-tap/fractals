@@ -125,7 +125,7 @@
         clearInterval(interval_id)
         
         ctx.beginPath()
-        let i = 0
+        let i = -1
         interval_id = setInterval(()=>{
         
         requestAnimationFrame(()=>{
@@ -141,7 +141,7 @@
 
         })
         
-        },18);
+        },16);
     }
     function AnimateOld() {
 //        ctx.clearRect(0,0,canvas.width,canvas.height);
