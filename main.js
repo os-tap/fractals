@@ -75,10 +75,8 @@
 
 
     function SetMood(mood_name = null) {
-//        console.log(mood_name)
-        if (!mood_name) mood_name = CURRENT_MOOD
         
-        clearInterval(interval_id)
+        if (!mood_name) mood_name = CURRENT_MOOD
 
         const mood = mood_list[mood_name];
 
@@ -125,12 +123,12 @@
         clearInterval(interval_id)
         
         ctx.beginPath()
-        let i = -1
+        let i = 0
         interval_id = setInterval(()=>{
         
         requestAnimationFrame(()=>{
 
-            if(++i >= POINTS.length) {
+            if(i >= POINTS.length) {
                 clearInterval(interval_id)
                 return
             };
@@ -139,43 +137,26 @@
             ctx.lineTo(POINTS[i].x, POINTS[i].y)
             ctx.stroke()
 
+            ++i
+
         })
         
-        },16);
-    }
-    function AnimateOld() {
-//        ctx.clearRect(0,0,canvas.width,canvas.height);
-//        let i = 0, j = POINTS.length-1;
-        let i = 0;
-        let j = POINTS.length - 1;
-//        ctx.beginPath();
-
-        
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        clearInterval(interval_id);
-        interval_id = setInterval(()=>{
-
-
-            ctx.beginPath();
-            ctx.moveTo(POINTS[i].x, POINTS[i].y);
-
-
-            ctx.lineTo(POINTS[i+1].x, POINTS[i+1].y);
-
-
-
-//            ctx.moveTo(POINTS[j].x, POINTS[j].y);
-//            ctx.lineTo(POINTS[j-1].x, POINTS[j-1].y);
-
-
-            ctx.stroke();
-
-            if(++i == POINTS.length - 1) {
-                clearInterval(interval_id);
-            };
-
         },18);
     }
 
-//})()
+
+    function AnimateTimeout() {
+
+        ctx.beginPath()
+        POINTS.forEach((point,i) => {
+            setTimeout(()=>{
+                requestAnimationFrame(()=>{
+                    ctx.clearRect(0,0,canvas.width,canvas.height)
+                    ctx.lineTo(point.x, point.y)
+                    ctx.stroke()
+                })
+            }, i*18)
+        });
+    }
+
 
