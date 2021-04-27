@@ -17,9 +17,9 @@
     const mood_list = {
         dragon: {
             calc: ()=>{
-                let x0 = canvas.width / 2,
+                let x0 = canvas.width / 1.75,
                     y0 = 165,
-                    x1 = canvas.width / 2,
+                    x1 = canvas.width / 1.75,
                     y1 = 615;
 
                 POINTS.push({
