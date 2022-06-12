@@ -1,2 +1,2 @@
 # fractals
-<a href="https://fractals.os-tap.ru/">https://fractals.os-tap.ru/</a>
+<a href="https://webostap.github.io/fractals/">https://webostap.github.io/fractals/</a>
